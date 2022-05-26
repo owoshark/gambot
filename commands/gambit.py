@@ -1,8 +1,11 @@
-import requests, discord, os
+import requests
+import discord
+import os
 
 #email: ""
 #password: ""
 #recaptchaToken: ""
+
 
 def profit(num):
 
@@ -34,6 +37,8 @@ def profit(num):
     profit_name = ''
     profit_odds1 = 0
     profit_odds2 = 0
+    bet1 = 0
+    bet2 = 0
 
     for id in match_ids:
         response2 = requests.get(
@@ -51,6 +56,8 @@ def profit(num):
                     profit_name = response2.json()['item']['name']
                     profit_odds1 = odds1
                     profit_odds2 = odds2
+                    bet1 = x
+                    bet2 = y
 
     embed = discord.Embed(title='Gambit Profit', color=242424)
     embed.add_field(
@@ -58,11 +65,14 @@ def profit(num):
     embed.add_field(name='Odds 1', value=str(profit_odds1))
     embed.add_field(name='Odds 2', value=str(profit_odds2))
     embed.add_field(name='Profit', value=format(max_profit, '.2%'))
-    embed.add_field(name='Bet 1', value=str(round(x)))
-    embed.add_field(name='Bet 2', value=str(round(y)))
+    embed.add_field(name='Bet 1', value=str(round(bet1)))
+    embed.add_field(name='Bet 2', value=str(round(bet2)))
     embed.add_field(name='Tokens', value=tokens)
     embed.set_footer(text='Swagit donations accepted @phillter')
     #webhook.send(embed=embed, content='<@&{}>'.format('526067036145844235'))
-    #print('Best hedge is '+profit_name+' at '+str(profit_odds1)+'/'+str(profit_odds2) +
+    # print('Best hedge is '+profit_name+' at '+str(profit_odds1)+'/'+str(profit_odds2) +
     #      ' '+format(max_profit, '.2%')+'\nhttps://app.gambitrewards.com/match/'+profit_id)
     return embed
+
+
+#profit(20000)

@@ -10,17 +10,17 @@ async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='for !help'))
 
 @bot.command()
-async def gp(ctx, args):
+async def gp(ctx, tokens):
     try:
-        if not args:
-            await ctx.send("Proper usage: !gp tokens")
+        if tokens:
+            await ctx.send(embed=gambit.profit(tokens))
         else:
-            await ctx.send(embed=gambit.profit(args))
+            await ctx.send("Proper usage: !gp tokens")
     except:
         await ctx.send("An error occurred. Please contact the developer.")
 
 @bot.command()
-async def help(ctx, *args):
+async def help(ctx):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
 
 bot.run(os.environ.get('BOT_TOKEN'))

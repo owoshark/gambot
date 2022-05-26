@@ -15,5 +15,5 @@ async def gp(ctx, *args):
 async def help(ctx, *args):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
 
-bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching), name='for !help')
+bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='for !help'))
 bot.run(os.environ.get('BOT_TOKEN'))

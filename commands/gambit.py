@@ -7,7 +7,7 @@ import requests, discord, os
 def profit(*args):
 
     games_list = ['Basketball', 'Ice Hockey', 'Baseball']
-    auth_token = os.environ.AUTH_TOKEN
+    auth_token = os.environ.get('AUTH_TOKEN')
     if args[1]:
         auth_token = args[1]
     headers = {'Authorization': auth_token}

@@ -15,4 +15,4 @@ async def gp(ctx, *args):
 async def help(ctx, *args):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
 
-bot.run(os.environ.BOT_TOKEN)
+bot.run(os.environ.get('BOT_TOKEN'))

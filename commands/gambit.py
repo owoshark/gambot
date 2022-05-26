@@ -1,16 +1,13 @@
-from pydoc import describe
-import requests
-import discord
+import requests, discord, os
 
 #email: ""
 #password: ""
 #recaptchaToken: ""
 
-
 def profit(*args):
 
     games_list = ['Basketball', 'Ice Hockey', 'Baseball']
-    auth_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NTQxMDg5MjMsInN1YiI6ImJkZDAyNzU3LTdiNDQtNDg4MC1hOGE3LTFlNWUyZWFhNWQxNSJ9.p_E162Hi1H_l73_v_o5YqTu_q4uYc1AaBILHAvpCV6I'
+    auth_token = os.environ.AUTH_TOKEN
     if args[1]:
         auth_token = args[1]
     headers = {'Authorization': auth_token}
@@ -18,7 +15,7 @@ def profit(*args):
     response = requests.get(
         'https://api-production.gambitrewards.com/api/v1/matches/', headers=headers)
 
-    #webhook = discord.Webhook.from_url('https://discord.com/api/webhooks/650101895343505418/xt-j3QlTmgaVfNGc2iwKs_EOrlA4VYb-PmCf84_EvZl98R0dGfy5x8friwqej08Shw7z', adapter=discord.RequestsWebhookAdapter())
+    #webhook = discord.Webhook.from_url('', adapter=discord.RequestsWebhookAdapter())
 
     match_ids = []
     for match in response.json()['items']:

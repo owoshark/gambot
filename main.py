@@ -4,6 +4,11 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
 bot.remove_command('help')
+
+@bot.event
+async def on_ready():
+    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='for !help'))
+
 @bot.command()
 async def gp(ctx, *args):
     if not args:
@@ -14,9 +19,5 @@ async def gp(ctx, *args):
 @bot.command()
 async def help(ctx, *args):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
-
-async def status():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='for !help'))
-status()
 
 bot.run(os.environ.get('BOT_TOKEN'))

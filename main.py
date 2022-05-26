@@ -15,9 +15,10 @@ async def gp(ctx, tokens=None):
         if not tokens:
             await ctx.send("Proper usage: !gp tokens")
         else:
-            await ctx.send(embed=gambit.profit(tokens))
+            await ctx.send(embed=gambit.profit(int(tokens)))
     except Exception as e:
-        await ctx.send(e)
+        print(e)
+        await ctx.send("An error occurred. Contact the developer.")
 
 @bot.command()
 async def help(ctx):

@@ -30,13 +30,10 @@ def profit(num):
     tokens = num
     profit = 0
     max_profit = 0
-    bets1 = []
-    bets2 = []
-    profits = []
-    profit_ids = []
-    profit_names = []
-    profit_odds1 = []
-    profit_odds2 = []
+    profit_id = ''
+    profit_name = ''
+    profit_odds1 = 0
+    profit_odds2 = 0
 
     for id in match_ids:
         response2 = requests.get(
@@ -48,32 +45,24 @@ def profit(num):
                 x = tokens / (1+odds1/odds2)
                 y = tokens / (1+odds2/odds1)
                 profit = (odds1*x - tokens*.9) / (tokens*.9)
-                if profit >= max_profit:
+                if profit > max_profit:
                     max_profit = profit
-                    bets1.append(x)
-                    bets2.append(y)
-                    profits.append(profit)
-                    profit_ids.append(id)
-                    profit_names.append(response2.json()['item']['name'])
-                    profit_odds1.append(odds1)
-                    profit_odds2.append(odds2)
+                    profit_id = id
+                    profit_name = response2.json()['item']['name']
+                    profit_odds1 = odds1
+                    profit_odds2 = odds2
 
     embed = discord.Embed(title='Gambit Profit', color=242424)
-
-    for i in reversed(range(len(profit_ids))):
-        embed.add_field(
-            name='Game ' + str(len(profit_ids)-i), value='[{}](https://app.gambitrewards.com/match/{})'.format(profit_names[i], profit_ids[i]), inline=False)
-        embed.add_field(name='Odds 1', value=str(profit_odds1[i]))
-        embed.add_field(name='Odds 2', value=str(profit_odds2[i]))
-        embed.add_field(name='Profit', value=format(profits[i], '.2%'))
-        embed.add_field(name='Bet 1', value=str(round(bets1[i])))
-        embed.add_field(name='Bet 2', value=str(round(bets2[i])))
-        embed.add_field(name='Tokens', value=tokens)
-
+    embed.add_field(
+        name='Game', value='[{}](https://app.gambitrewards.com/match/{})'.format(profit_name, profit_id), inline=False)
+    embed.add_field(name='Odds 1', value=str(profit_odds1))
+    embed.add_field(name='Odds 2', value=str(profit_odds2))
+    embed.add_field(name='Profit', value=format(max_profit, '.2%'))
+    embed.add_field(name='Bet 1', value=str(round(x)))
+    embed.add_field(name='Bet 2', value=str(round(y)))
+    embed.add_field(name='Tokens', value=tokens)
     embed.set_footer(text='Swagit donations accepted @phillter')
     #webhook.send(embed=embed, content='<@&{}>'.format('526067036145844235'))
     #print('Best hedge is '+profit_name+' at '+str(profit_odds1)+'/'+str(profit_odds2) +
     #      ' '+format(max_profit, '.2%')+'\nhttps://app.gambitrewards.com/match/'+profit_id)
     return embed
-
-#profit(20000)

@@ -1,26 +1,27 @@
 import commands.gambit as gambit
-import discord, os
+import discord
+import os
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
 bot.remove_command('help')
 
+
 @bot.event
 async def on_ready():
     await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='for !help'))
 
-@bot.command()
-async def gp(ctx, tokens):
-    try:
-        if tokens:
-            await ctx.send(embed=gambit.profit(tokens))
-        else:
-            await ctx.send("Proper usage: !gp tokens")
-    except:
-        await ctx.send("An error occurred. Please contact the developer.")
 
 @bot.command()
-async def help(ctx):
+async def gp(ctx, tokens):
+    if not tokens:
+        await ctx.send("Proper usage: !gp tokens")
+    else:
+        await ctx.send(embed=gambit.profit(tokens))
+
+
+@bot.command()
+async def help(ctx, *args):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
 
 bot.run(os.environ.get('BOT_TOKEN'))

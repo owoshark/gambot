@@ -4,7 +4,7 @@ import requests, discord, os
 #password: ""
 #recaptchaToken: ""
 
-def profit(*args):
+def profit(num):
 
     games_list = ['Basketball', 'Ice Hockey', 'Baseball']
     auth_token = os.environ.get('AUTH_TOKEN')
@@ -29,7 +29,7 @@ def profit(*args):
     y = 0
     odds1 = 0
     odds2 = 0
-    tokens = args[0]
+    tokens = num
     profit = 0
     max_profit = 0
     profit_id = ''

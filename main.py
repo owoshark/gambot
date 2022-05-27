@@ -12,13 +12,15 @@ async def on_ready():
 @bot.command()
 async def gp(ctx, tokens=None):
     try:
-        if not tokens:
-            await ctx.send("Proper usage: !gp tokens")
-        else:
-            await ctx.send(embed=gambit.profit(int(tokens)))
+        isinstance(int(tokens), int)
+        await ctx.send(embed=gambit.profit(int(tokens)))
+    except TypeError as e:
+        await ctx.send("Proper usage: !gp #OfTokens")     
+    except ValueError as e:
+        await ctx.send("Proper usage: !gp #OfTokens")
     except Exception as e:
         print(e)
-        await ctx.send("An error occurred. Contact the developer.")
+        await ctx.send("An error occurred: {}\nContact the developer.".format(e))
 
 @bot.command()
 async def help(ctx):

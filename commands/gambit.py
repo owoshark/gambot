@@ -32,6 +32,7 @@ def profit(num):
     odds2 = 0
     tokens = num
     profit = 0
+
     max_profit = 0
     profit_id = ''
     profit_name = ''
@@ -39,6 +40,14 @@ def profit(num):
     profit_odds2 = 0
     bet1 = 0
     bet2 = 0
+
+    max_profit2 = 0
+    profit_id2 = ''
+    profit_name2 = ''
+    profit_odds12 = 0
+    profit_odds22 = 0
+    bet12 = 0
+    bet22 = 0
 
     for id in match_ids:
         response2 = requests.get(
@@ -58,6 +67,14 @@ def profit(num):
                     profit_odds2 = odds2
                     bet1 = x
                     bet2 = y
+                if (profit > max_profit2) and (id is not profit_id):
+                    max_profit2 = profit
+                    profit_id2 = id
+                    profit_name2 = response2.json()['item']['name']
+                    profit_odds12 = odds1
+                    profit_odds22 = odds2
+                    bet12 = x
+                    bet22 = y
 
     embed = discord.Embed(title='Gambit Profit', color=242424)
     embed.add_field(
@@ -67,6 +84,15 @@ def profit(num):
     embed.add_field(name='Profit', value=format(max_profit, '.2%'))
     embed.add_field(name='Bet 1', value=str(round(bet1)))
     embed.add_field(name='Bet 2', value=str(round(bet2)))
+    embed.add_field(name='Tokens', value=tokens)
+
+    embed.add_field(
+        name='Game', value='[{}](https://app.gambitrewards.com/match/{})'.format(profit_name2, profit_id2), inline=False)
+    embed.add_field(name='Odds 1', value=str(profit_odds12))
+    embed.add_field(name='Odds 2', value=str(profit_odds22))
+    embed.add_field(name='Profit', value=format(max_profit2, '.2%'))
+    embed.add_field(name='Bet 1', value=str(round(bet12)))
+    embed.add_field(name='Bet 2', value=str(round(bet22)))
     embed.add_field(name='Tokens', value=tokens)
     embed.set_footer(text='Swagit donations accepted @phillter')
     #webhook.send(embed=embed, content='<@&{}>'.format('526067036145844235'))

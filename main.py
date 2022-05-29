@@ -13,10 +13,7 @@ async def on_ready():
 async def gp(ctx, tokens=None):
     try:
         isinstance(int(tokens), int)
-        if (bot.get_channel() == 979817708591923250) or (bot.get_channel() == 525364043175690261): 
-            await ctx.send(embed=gambit.profit(int(tokens)))
-        else:
-            await ctx.send("Use the command in #gambot-spam channel.")
+        await ctx.send(embed=gambit.profit(int(tokens)))
     except TypeError as e:
         await ctx.send("Proper usage: !gp #OfTokens")     
     except ValueError as e:

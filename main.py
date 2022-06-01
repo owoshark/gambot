@@ -15,8 +15,10 @@ async def gp(ctx, tokens=None):
         isinstance(int(tokens), int)
         await ctx.send(embed=gambit.profit(int(tokens)))
     except TypeError as e:
+        print(e)
         await ctx.send("Proper usage: !gp #OfTokens")     
     except ValueError as e:
+        print(e)
         await ctx.send("Proper usage: !gp #OfTokens")
     except Exception as e:
         print(e)

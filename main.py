@@ -1,5 +1,6 @@
 import commands.gambit as gambit
 import discord, os
+from json.decoder import JSONDecodeError
 from discord.ext import commands
 
 bot = commands.Bot(command_prefix='!')
@@ -14,6 +15,9 @@ async def gp(ctx, tokens=None):
     try:
         isinstance(int(tokens), int)
         await ctx.send(embed=gambit.profit(int(tokens)))
+    except JSONDecodeError as e:
+        print(e)
+        await ctx.send("Token expired")
     except TypeError as e:
         print(e)
         await ctx.send("Proper usage: !gp #OfTokens")     

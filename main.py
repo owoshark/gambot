@@ -31,6 +31,5 @@ async def gp(ctx, tokens=None):
 @bot.command()
 async def help(ctx):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
-    await ctx.send("Token expired. <@191787373292421120>")
 
 bot.run(os.environ.get('BOT_TOKEN'))

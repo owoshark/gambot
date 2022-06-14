@@ -17,7 +17,7 @@ async def gp(ctx, tokens=None):
         await ctx.send(embed=gambit.profit(int(tokens)))
     except JSONDecodeError as e:
         print(e)
-        await ctx.send("Token expired")
+        await ctx.send("Token expired. <@191787373292421120>")
     except TypeError as e:
         print(e)
         await ctx.send("Proper usage: !gp #OfTokens")     
@@ -31,5 +31,6 @@ async def gp(ctx, tokens=None):
 @bot.command()
 async def help(ctx):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
+    await ctx.send("Token expired. <@191787373292421120>")
 
 bot.run(os.environ.get('BOT_TOKEN'))

@@ -9,7 +9,7 @@ import os
 
 def profit(num):
 
-    games_list = ['Basketball', 'Ice Hockey', 'Baseball']
+    games_list = ['Basketball', 'Ice Hockey', 'Baseball', 'Esports']
     auth_token = os.environ.get('AUTH_TOKEN')
     headers = {'Authorization': auth_token}
 

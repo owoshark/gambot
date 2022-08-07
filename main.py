@@ -38,7 +38,7 @@ async def list(ctx):
     if (ctx.author.id == 191787373292421120):
         try:
             await ctx.send(embed=games.get_games())
-            await ctx.message.delete(delay=1)
+            await ctx.message.delete(delay=1.0)
         except JSONDecodeError as e:
             print(e)
             await ctx.send("Token expired. <@191787373292421120>")

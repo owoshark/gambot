@@ -17,8 +17,7 @@ def get_games():
 
     match_ids = {}
     for match in response.json()['items']:
-        if match['sport_category']['sport']['name'] in games_list:
-            match_ids.append(match['id'])
+        match_ids.append(match['id'])
 
     if not match_ids:
         return discord.Embed(description='No current games.', color=242424)

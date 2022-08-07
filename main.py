@@ -1,14 +1,19 @@
 import commands.gambit as gambit
-import discord, os
+import commands.games as games
+import discord, os, asyncio
+from datetime import time, datetime
 from json.decoder import JSONDecodeError
-from discord.ext import commands
+from discord.ext import commands, tasks
 
-bot = commands.Bot(command_prefix='!')
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='!', intents=intents, activity=discord.Activity(type=discord.ActivityType.watching, name='for !help'))
 bot.remove_command('help')
 
-@bot.event
-async def on_ready():
-    await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name='for !help'))
+async def main():
+    async with bot:
+        send_games.start()
+        await bot.start(os.environ.get('BOT_TOKEN'))
 
 @bot.command()
 async def gp(ctx, tokens=None):
@@ -29,7 +34,28 @@ async def gp(ctx, tokens=None):
         await ctx.send("An error occurred: {}\nContact the developer.".format(e))
 
 @bot.command()
+async def list(ctx):
+    try:
+        await ctx.send(embed=games.get_games())
+    except JSONDecodeError as e:
+        print(e)
+        await ctx.send("Token expired. <@191787373292421120>")
+    except Exception as e:
+        print(e)
+        await ctx.send("An error occurred: {}\nContact the developer.".format(e))
+
+@bot.command()
 async def help(ctx):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
 
-bot.run(os.environ.get('BOT_TOKEN'))
+t = time(3, 30, 0) #UTC to 830AM PST
+@tasks.loop(time=t)
+async def send_games():
+    channel = bot.get_channel(1005585267345854636)
+    await channel.send(embed=games.get_games())
+
+@send_games.before_loop
+async def before_send_games():
+    await bot.wait_until_ready()
+
+asyncio.run(main())

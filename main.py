@@ -35,14 +35,16 @@ async def gp(ctx, tokens=None):
 
 @bot.command()
 async def list(ctx):
-    try:
-        await ctx.send(embed=games.get_games())
-    except JSONDecodeError as e:
-        print(e)
-        await ctx.send("Token expired. <@191787373292421120>")
-    except Exception as e:
-        print(e)
-        await ctx.send("An error occurred: {}\nContact the developer.".format(e))
+    if (ctx.author.id == 191787373292421120):
+        try:
+            await ctx.send(embed=games.get_games())
+            await ctx.message.delete(delay=1)
+        except JSONDecodeError as e:
+            print(e)
+            await ctx.send("Token expired. <@191787373292421120>")
+        except Exception as e:
+            print(e)
+            await ctx.send("An error occurred: {}\nContact the developer.".format(e))
 
 @bot.command()
 async def help(ctx):

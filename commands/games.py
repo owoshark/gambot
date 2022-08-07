@@ -17,7 +17,7 @@ def get_games():
 
     match_ids = {}
     for match in response.json()['items']:
-        match_ids.append(match['id'])
+        match_ids[match['id']] = match['name']
 
     if not match_ids:
         return discord.Embed(description='No current games.', color=242424)

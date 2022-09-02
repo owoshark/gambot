@@ -20,8 +20,8 @@ def profit(num):
 
     match_ids = []
     for match in response.json()['items']:
-        #if match['sport_category']['sport']['name'] !=  'Soccer':
-        match_ids.append(match['id'])
+        if match['sport_category']['sport']['name'] != 'Soccer':
+            match_ids.append(match['id'])
 
     if not match_ids:
         return discord.Embed(description='No current games.', color=242424)

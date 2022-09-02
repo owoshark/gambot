@@ -8,7 +8,7 @@ from datetime import time, datetime
 
 def get_games():
 
-    games_list = ['Basketball', 'Ice Hockey', 'Baseball', 'Esports']
+    #games_list = ['Basketball', 'Ice Hockey', 'Baseball', 'Esports']
     auth_token = os.environ.get('AUTH_TOKEN')
     headers = {'Authorization': auth_token}
 

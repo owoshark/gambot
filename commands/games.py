@@ -45,8 +45,8 @@ def get_games():
             games_str = ''
 
     if not games_list:
-        return games_str
+        games_list.append(games_str)
 
-    return ''.join(games_list)
+    return games_list
 
 #get_games()

@@ -37,7 +37,8 @@ async def gp(ctx, tokens=None):
 async def list(ctx):
     if (ctx.author.id == 191787373292421120):
         try:
-            await ctx.send(games.get_games())
+            for s in games.get_games():
+                await ctx.send(s)
             await ctx.message.delete(delay=1.0)
         except JSONDecodeError as e:
             print(e)
@@ -54,7 +55,8 @@ t = time(14, 45, 0) #UTC to 745AM PST
 @tasks.loop(time=t)
 async def send_games():
     channel = bot.get_channel(1005585267345854636)
-    await channel.send(games.get_games())
+    for s in games.get_games():
+        await channel.send(s)
 
 @send_games.before_loop
 async def before_send_games():

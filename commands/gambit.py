@@ -20,7 +20,7 @@ def profit(num):
 
     match_ids = []
     for match in response.json()['items']:
-        #if match['sport_category']['sport']['name'] in games_list:
+        #if match['sport_category']['sport']['name'] !=  'Soccer':
         match_ids.append(match['id'])
 
     if not match_ids:
@@ -41,6 +41,14 @@ def profit(num):
     bet1 = 0
     bet2 = 0
 
+    prev_profit = 0
+    prev_profit_id = ''
+    prev_profit_name = ''
+    prev_profit_odds1 = 0
+    prev_profit_odds2 = 0
+    prev_bet1 = 0
+    prev_bet2 = 0
+
     max_profit2 = 0
     profit_id2 = ''
     profit_name2 = ''
@@ -60,6 +68,13 @@ def profit(num):
                 y = tokens / (1+odds2/odds1)
                 profit = (odds1*x - tokens*.9) / (tokens*.9)
                 if profit > max_profit:
+                    prev_profit = max_profit
+                    prev_profit_id = profit_id
+                    prev_profit_name = profit_name
+                    prev_profit_odds1 = profit_odds1
+                    prev_profit_odds2 = profit_odds2
+                    prev_bet1 = bet1
+                    prev_bet2 = bet2
                     max_profit = profit
                     profit_id = id
                     profit_name = response2.json()['item']['name']
@@ -75,6 +90,14 @@ def profit(num):
                     profit_odds22 = odds2
                     bet12 = x
                     bet22 = y
+                if (prev_profit > max_profit2):
+                    max_profit2 = prev_profit
+                    profit_id2 = prev_profit_id
+                    profit_name2 = prev_profit_name
+                    profit_odds12 = prev_profit_odds1
+                    profit_odds22 = prev_profit_odds2
+                    bet12 = prev_bet1
+                    bet22 = prev_bet2
 
     embed = discord.Embed(title='Gambit Profit', color=242424)
     embed.add_field(

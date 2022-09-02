@@ -22,14 +22,21 @@ def get_games():
     if not match_ids:
         return discord.Embed(description='No current games.', color=242424)
 
+    """field_length = ''
     embed = discord.Embed(title='Games '+ str(datetime.now().date()), color=242424)
     for id in match_ids:
-        embed.add_field(name='\u200b', value='[{}](https://app.gambitrewards.com/match/{})'.format(match_ids[id], id), inline=False)
-        
+        if len(field_length) < 4096:
+            embed.add_field(name='\u200b', value='[{}](https://app.gambitrewards.com/match/{})'.format(match_ids[id], id), inline=False)
+            field_length += str(embed.fields)
+        else:
+
     #webhook = discord.SyncWebhook.partial(id, 'token')
     #webhook.send(embed=embed)
     
-    return embed
+    return embed"""
+    games_msg = ''
+    for id in match_ids:
+        games_msg += 'https://app.gambitrewards.com/match/{} - {}\n'.format(id, match_ids[id])
 
-
+    return games_msg
 #get_games()

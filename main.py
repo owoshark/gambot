@@ -50,11 +50,11 @@ async def list(ctx):
 async def help(ctx):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
 
-t = time(14, 45, 0) #UTC to 830AM PST
+t = time(14, 45, 0) #UTC to 745AM PST
 @tasks.loop(time=t)
 async def send_games():
     channel = bot.get_channel(1005585267345854636)
-    await channel.send(embed=games.get_games())
+    await channel.send(games.get_games())
 
 @send_games.before_loop
 async def before_send_games():

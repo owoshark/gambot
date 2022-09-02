@@ -20,7 +20,8 @@ def get_games():
         match_ids[match['id']] = match['name']
 
     if not match_ids:
-        return discord.Embed(description='No current games.', color=242424)
+        #return discord.Embed(description='No current games.', color=242424)
+        return 'No current games.'
 
     """field_length = ''
     embed = discord.Embed(title='Games '+ str(datetime.now().date()), color=242424)
@@ -34,9 +35,9 @@ def get_games():
     #webhook.send(embed=embed)
     
     return embed"""
-    games_msg = ''
+    games_str = ''
     for id in match_ids:
-        games_msg += 'https://app.gambitrewards.com/match/{} - {}\n'.format(id, match_ids[id])
+        games_str += 'https://app.gambitrewards.com/match/{} - {}\n'.format(id, match_ids[id])
 
-    return games_msg
+    return games_str
 #get_games()

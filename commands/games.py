@@ -39,7 +39,7 @@ def get_games():
     games_list = []
     for id in match_ids:
         s = 'https://app.gambitrewards.com/match/{} - {}\n'.format(id, match_ids[id])
-        if len(games_str)+len(s) < 4000:
+        if len(games_str)+len(s) < 2000:
             games_str += s
         else:
             games_list.append(games_str)

@@ -66,7 +66,7 @@ def profit(num):
                 odds2 = bet['match_lines'][1]['payout']
                 x = tokens / (1+odds1/odds2)
                 y = tokens / (1+odds2/odds1)
-                profit = (odds1*x - tokens*.9) / (tokens*.9)
+                profit = (odds1*x - tokens*.95) / (tokens*.95)
                 if profit > max_profit:
                     prev_profit = max_profit
                     prev_profit_id = profit_id

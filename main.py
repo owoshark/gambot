@@ -49,7 +49,7 @@ async def list(ctx):
             await ctx.send("An error occurred: {}".format(e))
 
 @bot.command()
-async def hedge(ctx, odds1=None, odds2=None, tokens=None):
+async def testhedge(ctx, odds1=None, odds2=None, tokens=None):
     try:
         if (ctx.channel.id == 979277184118186025):
             await ctx.send(calcHedge.calcHedge(odds1, odds2, tokens))

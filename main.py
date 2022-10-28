@@ -1,5 +1,6 @@
 import commands.gambit as gambit
 import commands.games as games
+import commands.calcHedge as calcHedge
 import discord, os, asyncio
 from datetime import time, datetime
 from json.decoder import JSONDecodeError
@@ -48,10 +49,22 @@ async def list(ctx):
             await ctx.send("An error occurred: {}".format(e))
 
 @bot.command()
+async def hedge(ctx, odds1=None, odds2=None, tokens=None):
+    try:
+        if (ctx.channel.id == 979277184118186025):
+            await ctx.send(calcHedge.calcHedge(odds1, odds2, tokens))
+    except TypeError as e:
+        print(e)
+        await ctx.send("Proper usage: !hedge odds1 odds2 tokens")     
+    except ValueError as e:
+        print(e)
+        await ctx.send("Proper usage: !hedge odds1 odds2 tokens")
+
+@bot.command()
 async def help(ctx):
     await ctx.send(embed=discord.Embed(title='Gambot Commands', description='!gp tokens'))
 
-t = time(14, 45, 0) #UTC to 745AM PST
+t = time(15, 15, 0) #UTC to 815AM PST
 @tasks.loop(time=t)
 async def send_games():
     channel = bot.get_channel(1005585267345854636)

@@ -48,7 +48,7 @@ async def list(ctx):
             print(e)
             await ctx.send("An error occurred: {}".format(e))
 
-@bot.command()
+"""@bot.command()
 async def testhedge(ctx, odds1=None, odds2=None, tokens=None):
     try:
         if (ctx.channel.id == 979277184118186025):
@@ -58,7 +58,7 @@ async def testhedge(ctx, odds1=None, odds2=None, tokens=None):
         await ctx.send("Proper usage: !hedge odds1 odds2 tokens")     
     except ValueError as e:
         print(e)
-        await ctx.send("Proper usage: !hedge odds1 odds2 tokens")
+        await ctx.send("Proper usage: !hedge odds1 odds2 tokens")"""
 
 @bot.command()
 async def help(ctx):

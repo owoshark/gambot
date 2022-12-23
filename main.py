@@ -5,12 +5,20 @@ import discord, os, asyncio
 from datetime import time, datetime
 from json.decoder import JSONDecodeError
 from discord.ext import commands, tasks
-from http.server import HTTPServer
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
+class handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type','text/html')
+        self.end_headers()
+
+        message = "Hello, World!"
+        self.wfile.write(bytes(message, "utf8"))
 # Get port number from the PORT environment variable or 3000 if not specified
 port = os.getenv('PORT', 3000)
 
-server = HTTPServer(('0.0.0.0', port), MyServer)
+server = HTTPServer(('0.0.0.0', port), handler)
 server.serve_forever()
 
 intents = discord.Intents.default()

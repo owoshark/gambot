@@ -5,17 +5,6 @@ import discord, os, asyncio
 from datetime import time, datetime
 from json.decoder import JSONDecodeError
 from discord.ext import commands, tasks
-import SimpleHTTPServer
-import SocketServer
-
-PORT = 3000
-
-Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-
-httpd = SocketServer.TCPServer(("", PORT), Handler)
-
-print("serving at port", PORT)
-httpd.serve_forever()
 
 intents = discord.Intents.default()
 intents.message_content = True

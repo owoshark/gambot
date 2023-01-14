@@ -1,6 +1,5 @@
-import requests
-import discord
-import os
+import requests, discord, os
+from datetime import datetime
 
 #email: ""
 #password: ""
@@ -77,7 +76,7 @@ def profit(num):
                     prev_bet2 = bet2
                     max_profit = profit
                     profit_id = id
-                    profit_name = response2.json()['item']['name']
+                    profit_name = response2.json()['item']['name']  + datetime.fromisoformat(response2.json()['item']['datetime']).strftime("%x")
                     profit_odds1 = odds1
                     profit_odds2 = odds2
                     bet1 = x

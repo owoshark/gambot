@@ -32,7 +32,7 @@ async def gp(ctx, tokens=None):
         await ctx.send("Proper usage: !gp #OfTokens")
     except Exception as e:
         print(e)
-        await ctx.send("An error occurred: {}\nContact the developer.".format(e))
+        await ctx.send("An error occurred: {}".format(e))
 
 @bot.command()
 async def list(ctx):

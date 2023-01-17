@@ -76,7 +76,7 @@ def profit(num):
                     prev_bet2 = bet2
                     max_profit = profit
                     profit_id = id
-                    profit_name = response2.json()['item']['name']  + " " + datetime.fromisoformat(response2.json()['item']['datetime'].replace("Z", "")).strftime("%x")
+                    profit_name = response2.json()['item']['name']  + " " + datetime.fromisoformat(response2.json()['item']['cut_off_time'].replace("Z", "")).strftime("%x")
                     profit_odds1 = odds1
                     profit_odds2 = odds2
                     bet1 = x
@@ -84,7 +84,7 @@ def profit(num):
                 if (profit > max_profit2) and (id is not profit_id):
                     max_profit2 = profit
                     profit_id2 = id
-                    profit_name2 = response2.json()['item']['name']  + " " + datetime.fromisoformat(response2.json()['item']['datetime'].replace("Z", "")).strftime("%x")
+                    profit_name2 = response2.json()['item']['name']  + " " + datetime.fromisoformat(response2.json()['item']['cut_off_time'].replace("Z", "")).strftime("%x")
                     profit_odds12 = odds1
                     profit_odds22 = odds2
                     bet12 = x
